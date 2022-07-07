@@ -8,6 +8,7 @@ from bin.bert import Bertenizer
 
 st.title("Pairwise sentiment analysis")
 st.header("Welcome to this wonderful app which detects whether the first sentence is more positive than the right one. Powered by Streamlit.")
+st.write('Getting everything ready for you... Please wait.')
 
 model = tf.keras.models.load_model('models/model0') #Load pre-trained model
 bert = Bertenizer() #initialize BERT embeddings and load the model pre-trained
