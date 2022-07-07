@@ -2,18 +2,17 @@
 
 import streamlit as st
 import numpy as np
-import pandas as pd
 import tensorflow as tf
 from bin.bert import Bertenizer
 
 st.title("Pairwise sentiment analysis")
-st.header("Welcome to this wonderful app which detects whether the first sentence is more positive than the right one. Powered by Streamlit.")
+st.header("Welcome to this wonderful app which detects which sentence is more positive. Powered by Streamlit.")
 st.write('Getting everything ready for you... Please wait.')
 
 model = tf.keras.models.load_model('models/model0') #Load pre-trained model
 bert = Bertenizer() #initialize BERT embeddings and load the model pre-trained
 
-dictionary_output = {0 : 'right is more positive', 1: 'left is more positive'}
+dictionary_output = {0 : 'lower text is more positive', 1: 'upper text is more positive'}
 
 sentences = st.text_area("Please enter your two sentences/text here. Each new line will be concidered as a new sentence/text.")
 pressed = st.button("Calculate sentiment")
