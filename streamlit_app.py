@@ -10,6 +10,8 @@ st.title("Pairwise sentiment analysis")
 st.header("Welcome to this wonderful app which detects whether the first sentence is more positive than the right one. Powered by Streamlit.")
 
 model = tf.keras.models.load_model('models/model0') #Load pre-trained model
+bert = Bertenizer() #initialize BERT embeddings and load the model pre-trained
+
 dictionary_output = {0 : 'right is more positive', 1: 'left is more positive'}
 
 sentences = st.text_area("Please enter your two sentences/text here. Each new line will be concidered as a new sentence/text.")
@@ -20,11 +22,10 @@ if pressed & (sentences is not None):
     splitted = sentences.splitlines() #this should only be 2 sentences
     
     #Now convert sentences to BERT embedding
-    bert = Bertenizer()
     train_pooled_bert = bert.pooling(splitted, 'max') #the model is going to be also max
 
     def reshapeTens(tens):
-        shape = (tens.shape[0], 2, 768)
+        shape = (1, 2, 768)
         tens = tf.reshape(tens, shape)
         return tens
 
