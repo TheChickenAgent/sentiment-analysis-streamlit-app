@@ -1,6 +1,5 @@
 import tensorflow as tf
 from transformers import BertTokenizer, TFBertModel
-from tqdm import tqdm
 
 class Bertenizer:
     """
@@ -52,7 +51,7 @@ class Bertenizer:
             v_pooled = tf.nn.max_pool(v, ksize = (v.shape[1],), strides = 1, padding = 'VALID') #average pool the (1, dim, 768) vector
         v_total = tf.reshape(v_pooled, shape=(1, v.shape[0], v.shape[2])) #reshape it from (1,1,768) to (1, 768)
 
-        for i in tqdm(range(1, len(all_sentences))):
+        for i in range(1, len(all_sentences)):
             v = self.bertify(all_sentences[i]).last_hidden_state #let the sentence through the BERT model and take the last_hidden_state
             if(pooling_method == 'average'):
                 v_pooled = tf.nn.avg_pool(v, ksize = (v.shape[1],), strides = 1, padding = 'VALID') #average pool the (1, dim, 768) vector

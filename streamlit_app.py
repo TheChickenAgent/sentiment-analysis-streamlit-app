@@ -36,5 +36,5 @@ if pressed & (sentences is not None):
     pred = np.rint(pred)
 
     st.write("Processed and the result is:")
-    st.write(dictionary_output[pred[0]]) # working with trigrams, and the first two characters are spaces, so from 2:end should be in the list. +1 because Python indexes work from 0.
+    st.write(dictionary_output[pred[0][0]]) # working with trigrams, and the first two characters are spaces, so from 2:end should be in the list. +1 because Python indexes work from 0.
     st.write(" ") # Ensures nice spacing
